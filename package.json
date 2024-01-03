@@ -8,7 +8,8 @@
     "start": "next start",
     "export": "next export",
     "lint": "echo 'ESLint deshabilitado'",
-    "compile": "peggy --format es -o app/principal/analizador.js app/grammar/analizador.pegjs"
+    "compile": "peggy --format es -o app/principal/analizador.js app/grammar/analizador.pegjs",
+    "bootstrap": "node app/principal/Generator.js"
   },
   "dependencies": {
     "@codemirror/lang-javascript": "^6.2.2",

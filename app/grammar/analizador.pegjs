@@ -1,58 +1,200 @@
-inicio
-    = regla (espacio ";" espacio regla)*  ";"? { return "Gramática correcta" }
 
-identificador = [_a-zA-Z][_a-zA-Z0-9]*
+Gramatica
+  = (EspaciadoSimple InicializadorGlobal)? (EspaciadoSimple Inicializador)? EspaciadoSimple (Regla EspaciadoSimple)+ { return "Gramática correcta" }
 
-texto = '"' [^"]* '"' / "'" [^']* "'"
+InicializadorGlobal
+  = "{" BloqueDeCodigo "}" FinSecuencia
 
-espacio
-    = ([ \t\r\n] / comentarios_simples/ comentarios_multilinea)* 
+Inicializador
+  = BloqueDeCodigo FinSecuencia
 
-comentarios_simples
-    = "//" [^\n]*
+Regla
+  = NombreIdentificador EspaciadoSimple
+    (LiteralCadena EspaciadoSimple)?
+    "=" EspaciadoSimple
+    Expresion FinSecuencia
 
-comentarios_multilinea
-    = "/*" (!"*/" .)* "*/"
+Expresion
+  = ExpresionOpcional
 
-numero
-    = [0-9]+
+ExpresionOpcional
+  = ExpresionAccion (EspaciadoSimple "/" EspaciadoSimple ExpresionAccion)*
 
-instancias
-    = "*"
-    / "+"
-    / "?"
+ExpresionAccion
+  = ExpresionSecuencia (EspaciadoSimple BloqueDeCodigo)?
 
-corchete_abre = "["
+ExpresionSecuencia
+  = ExpresionEtiquetada (EspaciadoSimple ExpresionEtiquetada)*
 
-corchete_cierra = "]"
+ExpresionEtiquetada
+  = "@" EtiquetaPrefijo? ExpresionPrefijo
+  / EtiquetaPrefijo ExpresionPrefijo
+  / ExpresionPrefijo
 
-clase = corchete_abre rango + corchete_cierra
+EtiquetaPrefijo
+  = NombreIdentificador EspaciadoSimple ":" EspaciadoSimple
 
-rango = [^[\]-] "-" [^[\]-]
-	/ [^[\]]+
+ExpresionPrefijo
+  = OperadorPrefijo EspaciadoSimple ExpresionSufijo
+  / ExpresionSufijo
 
-regla
-    =espacio identificador espacio "=" espacio alternativa espacio 
+OperadorPrefijo
+  = "$"
+  / "&"
+  / "!"
 
-alternativa
-    = listado_expresiones (espacio "/" espacio listado_expresiones)*
-    
-listado_expresiones
-	= expresion espacio instancias? (espacio expresion espacio instancias?)*
+ExpresionSufijo
+  = ExpresionPrimaria EspaciadoSimple OperadorSufijo
+  / ExpresionRepetida
+  / ExpresionPrimaria
 
-expresion
-    = identificador (":" expresion_unica)
-    / expresion_unica
+OperadorSufijo
+  = "?"
+  / "*"
+  / "+"
 
-expresion_unica
-  =  texto 
-    / identificador 
-    / grupo
-    / clase
-    / numero
+ExpresionRepetida
+  = ExpresionPrimaria EspaciadoSimple "|" EspaciadoSimple Limites EspaciadoSimple ("," EspaciadoSimple Expresion EspaciadoSimple)? "|"
 
-grupo
-  = "[" espacio alternativa espacio "-" espacio alternativa espacio "]"
-  / "[" espacio alternativa espacio "]"
-  / "(" espacio alternativa espacio ")"
-  / espacio "/" alternativa espacio
+Limites
+  = Limite? EspaciadoSimple ".." EspaciadoSimple Limite?
+  / Limite
+
+Limite
+  = Entero
+  / NombreIdentificador
+  / BloqueDeCodigo
+
+ExpresionPrimaria
+  = ComparadorLiteral
+  / ComparadorClaseCaracter
+  / ComparadorCualquiera
+  / ReferenciaRegla
+  / PredicadoSemantico
+  / "(" EspaciadoSimple Expresion EspaciadoSimple ")"
+
+ReferenciaRegla
+  = NombreIdentificador "." NombreIdentificador
+  / NombreIdentificador !(EspaciadoSimple (LiteralCadena EspaciadoSimple)? "=")
+
+PredicadoSemantico
+  = OperadorSemantico EspaciadoSimple BloqueDeCodigo
+
+OperadorSemantico
+  = "&"
+  / "!"
+
+ComparadorLiteral
+  = LiteralCadena "i"?
+
+LiteralCadena
+  = '"' CaracterCadenaDoble* '"'
+  / "'" CaracterCadenaSimple* "'"
+
+CaracterCadenaDoble
+  = $(!('"' / "\\" / TerminadorDeLinea) CaracterFuente)
+  / "\\" SecuenciaEscape
+  / ContinuacionLinea
+
+CaracterCadenaSimple
+  = $(!("'" / "\\" / TerminadorDeLinea) CaracterFuente)
+  / "\\" SecuenciaEscape
+  / ContinuacionLinea
+
+ComparadorClaseCaracter
+  = "["
+    "^"?
+    (RangoClaseCaracter / ClaseCaracter)*
+    "]"
+    "i"?
+
+RangoClaseCaracter
+  = ClaseCaracter "-" ClaseCaracter
+
+ClaseCaracter
+  = $(!("]" / "\\" / TerminadorDeLinea) CaracterFuente)
+  / "\\" SecuenciaEscape
+  / ContinuacionLinea
+
+ContinuacionLinea
+  = "\\" TerminadorDeLinea
+
+SecuenciaEscape
+  = EscapeCaracter
+  / "0" !DigitoDecimal
+
+EscapeCaracter
+  = "'"
+  / '"'
+  / "\\"
+  / "b"
+  / "f"
+  / "n"
+  / "r"
+  / "t"
+  / "u"
+  / "v"
+
+DigitoDecimal
+  = [0-9]
+
+ComparadorCualquiera
+  = "."
+
+BloqueDeCodigo
+  = "{" Codigo "}"
+
+Codigo
+  = $((![{}] CaracterFuente)+ / "{" Codigo "}")*
+
+Entero
+  = $DigitoDecimal+
+
+CaracterFuente
+  = .
+
+EspacioBlanco
+  = "\t"
+  / "\v"
+  / "\f"
+  / " "
+
+TerminadorDeLinea
+  = "\n"
+  / "\r\n"
+  / "\r"
+
+Comentario
+  = ComentarioMultilinea
+  / ComentarioLineaSimple
+
+ComentarioMultilinea
+  = "/*" (!"*/" CaracterFuente)* "*/"
+
+ComentarioLineaSimple
+  = "//" (!TerminadorDeLinea CaracterFuente)*
+
+NombreIdentificador
+  = InicioIdentificador ParteIdentificador*
+
+InicioIdentificador
+  = [a-zA-Z]
+  / "_"
+
+ParteIdentificador
+  = InicioIdentificador
+  / "$"
+  / DigitoDecimal
+  
+EspaciadoSimple
+  = (EspacioBlanco / TerminadorDeLinea / Comentario)*
+_
+  = (EspacioBlanco / ComentarioMultilinea)*
+
+FinSecuencia
+  = (EspaciadoSimple ";")+  
+  / _ ComentarioLineaSimple? TerminadorDeLinea  
+  / EspaciadoSimple FinArchivo
+
+FinArchivo
+  = !.
