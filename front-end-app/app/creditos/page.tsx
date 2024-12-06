@@ -1,4 +1,4 @@
-import { table } from "console";
+
 import '../../styles/compilador.css';
 
 export default function Creditos() {
