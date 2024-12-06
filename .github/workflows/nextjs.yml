@@ -49,6 +49,7 @@ jobs:
             exit 1
           fi
       - name: Setup Node
+        working-directory: front-end-app
         uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -72,7 +73,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
-        working-directory: cd front-end-app
+        working-directory: front-end-app
         run:  ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
