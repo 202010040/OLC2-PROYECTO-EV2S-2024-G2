@@ -3,30 +3,45 @@
 import { InputTextarea } from 'primereact/inputtextarea';
 import { useState } from 'react';
 import { Button } from 'primereact/button';
-import { AnalizarGramatica } from './analizador'
+import { AnalizarGramatica } from './analizador';
+import '../../styles/compilador.css'
+
+
 
 export default function Principal() {
     const [Entrada, setEntrada] = useState('');
     const [Salida, setSalida] = useState('');
+
     return (
         <>
+
             <div className="grid">
-                <div className="col">
+                <div className="col-6">
                     <h4> Ingrese La gramatica </h4>
-                    <InputTextarea autoResize value={Entrada} onChange={(e) => setEntrada(e.target.value)} rows={15} cols={120} />
+                    <InputTextarea
+                        autoResize
+                        value={Entrada}
+                        onChange={(e) => setEntrada(e.target.value)}
+                        className="custom-textarea"
+                    />
+
                 </div>
-                <div className="col">
-                    <h4> Gramatica Revisada </h4>
-                    <InputTextarea autoResize value={Salida} disabled rows={15} cols={120} />
-                </div>
-            </div>
-            <div className="grid">
-                <div className="col-4 col-offset-5">
-                    <Button 
-                        label="Analizar" 
-                        severity="secondary"  
+                <div className="col-1" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                    <Button
+                        label="Analizar"
+                        severity="secondary"
+                        outlined
                         raised
-                        onClick={ () => setSalida(AnalizarGramatica(Entrada))}  
+                        onClick={() => setSalida(AnalizarGramatica(Entrada))}
+                    />
+                </div>
+                <div className="col-5">
+                    <h4> Gramatica Revisada </h4>
+                    <InputTextarea
+                        autoResize
+                        value={Salida}
+                        className="custom-textarea"
+                        disabled
                     />
                 </div>
             </div>

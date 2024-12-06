@@ -1,6 +1,9 @@
 import { redirect } from 'next/navigation';
+import Principal from './principal/page';
 
 
 export default function Home() {
-  redirect('principal');
+  return(
+    <Principal></Principal>
+  )
 }
