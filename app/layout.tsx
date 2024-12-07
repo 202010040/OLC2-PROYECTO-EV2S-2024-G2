@@ -6,28 +6,28 @@ import '../styles/principal.css';
 
 import { Menubar } from 'primereact/menubar';
 import { MenuItem } from 'primereact/menuitem';
-import getConfig from 'next/config';
+;
 
-const { publicRuntimeConfig } = getConfig();
-const basePath = publicRuntimeConfig?.basePath || '';
+// const rutabase:string = '/OLC2-PROYECTO-EV2S-2024-G2' //Produccion
+const rutabase:string = '' //Local
 
 const items: MenuItem[] = [
   {
     label: 'Principal',
     icon: 'pi pi-home',
-    url: `${basePath}/`
+    url: `${rutabase}/`
   },
   {
     label: 'Integrantes',
     icon: 'pi pi-star',
-    url: `${basePath}/creditos`
+    url: `${rutabase}/creditos`
   }
 ];
 
 const start = (
   <>
     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-      <img alt="logo" src="/iconos/fiusac_negro.png" height="40" className="mr-2" />
+    <img alt="logo" src={`/iconos/fiusac_negro.png`} height="40" className="mr-2" />
     </div>
   </>
 );
