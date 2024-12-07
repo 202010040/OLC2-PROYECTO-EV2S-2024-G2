@@ -214,7 +214,7 @@ function peg$parse(input, options) {
 
   var peg$f0 = function() { return "Gramática correcta" };
   var peg$currPos = options.peg$currPos | 0;
-  //var peg$savedPos = peg$currPos;
+  var peg$savedPos = peg$currPos;
   var peg$posDetailsCache = [{ line: 1, column: 1 }];
   var peg$maxFailPos = peg$currPos;
   var peg$maxFailExpected = options.peg$maxFailExpected || [];

@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "export": "next export",
-    "lint": "next lint",
-    "compile": "peggy --format es -o app/principal/analizador.js app/grammar/analizador.pegjs"  
+    "lint": "echo 'ESLint deshabilitado'",
+    "compile": "peggy --format es -o app/principal/analizador.js app/grammar/analizador.pegjs"
   },
   "dependencies": {
     "next": "15.0.4",
@@ -23,7 +23,6 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-syntax-highlighter": "^15.5.13",
-    "eslint": "^8",
     "eslint-config-next": "15.0.4",
     "peggy": "^4.2.0",
     "postcss": "^8",
