@@ -15,10 +15,7 @@ export default nextConfig;
 // Produccion
 const nextConfig: NextConfig = {
   basePath: '/OLC2-PROYECTO-EV2S-2024-G2',
-  trailingSlash: true,
-  publicRuntimeConfig: {
-    basePath: '/OLC2-PROYECTO-EV2S-2024-G2',
-  },
+  output: 'export'
 };
 
 export default nextConfig;
