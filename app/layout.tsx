@@ -8,8 +8,8 @@ import { Menubar } from 'primereact/menubar';
 import { MenuItem } from 'primereact/menuitem';
 ;
 
-// const rutabase:string = '/OLC2-PROYECTO-EV2S-2024-G2' //Produccion
-const rutabase:string = '' //Local
+const rutabase:string = '/OLC2-PROYECTO-EV2S-2024-G2' //Produccion
+//const rutabase:string = '' //Local
 
 const items: MenuItem[] = [
   {
