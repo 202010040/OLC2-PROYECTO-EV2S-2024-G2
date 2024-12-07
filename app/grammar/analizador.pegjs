@@ -7,7 +7,7 @@ texto = '"' [^"']* '"' / "'" [^"']* "'"
 
 espacio
   = [ \t\r\n]*
-
+  
 numero
     = [0-9]+
 
@@ -22,23 +22,23 @@ clase
 // Reglas de la gramática
 
 regla
-    =espacio identificador espacio "=" espacio alternativa espacio instancias? espacio ";"?
+    =espacio identificador espacio "=" espacio alternativa espacio ";"?
+
 alternativa
     = expresion* (espacio "/" espacio expresion)*
 
 expresion
-  = identificador espacio expresion
-    /espacio texto espacio identificador
+  = espacio texto espacio 
+    / espacio identificador (espacio expresion)* espacio
     / grupo
     /clase
-    /identificador
     /numero
+    /instancias
 
 
 
 grupo
-  = "[" espacio expresion "-" expresion espacio "]"
-  / "[" espacio expresion espacio "]"
-  / "(" espacio expresion* espacio ")"
-  / espacio "/" expresion espacio
-
+  = "[" espacio alternativa espacio "-" espacio alternativa espacio "]"
+  / "[" espacio alternativa espacio "]"
+  / "(" espacio alternativa espacio ")"
+  / espacio "/" alternativa espacio
