@@ -27,7 +27,7 @@ const items: MenuItem[] = [
 const start = (
   <>
     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-    <img alt="logo" src={`/iconos/fiusac_negro.png`} height="40" className="mr-2" />
+    <img alt="logo" src={`${rutabase}/iconos/fiusac_negro.png`} height="40" className="mr-2" />
     </div>
   </>
 );
