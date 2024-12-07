@@ -3,7 +3,7 @@
 import { InputTextarea } from 'primereact/inputtextarea';
 import { useState } from 'react';
 import { Button } from 'primereact/button';
-import { AnalizarGramatica } from './analizador';
+import { parse as AnalizarGramatica } from './analizador';
 import '../../styles/compilador.css'
 
 
@@ -11,6 +11,21 @@ import '../../styles/compilador.css'
 export default function Principal() {
     const [Entrada, setEntrada] = useState('');
     const [Salida, setSalida] = useState('');
+
+    /*const handleAnalizar = () => {
+        try {
+            const resultado = AnalizarGramatica(Entrada);
+            setSalida(resultado);
+            
+        } catch (error) {
+            if (error instanceof Error) {
+                console.log(error.message);
+                setSalida(`Error: ${error.message}`);
+            } else {
+                setSalida("Error desconocido");
+            }
+        }
+    }*/
 
     return (
         <>
