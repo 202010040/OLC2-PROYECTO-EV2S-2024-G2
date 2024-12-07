@@ -6,26 +6,29 @@ import '../styles/principal.css';
 
 import { Menubar } from 'primereact/menubar';
 import { MenuItem } from 'primereact/menuitem';
+import getConfig from 'next/config';
+
+const { publicRuntimeConfig } = getConfig();
+const basePath = publicRuntimeConfig?.basePath || '';
 
 const items: MenuItem[] = [
   {
-      label: 'Principal',
-      icon: 'pi pi-home',
-      url: '/'
+    label: 'Principal',
+    icon: 'pi pi-home',
+    url: `${basePath}/`
   },
   {
-      label: 'Integrantes',
-      icon: 'pi pi-star',
-      url: '/creditos'
+    label: 'Integrantes',
+    icon: 'pi pi-star',
+    url: `${basePath}/creditos`
   }
-]; 
+];
 
 const start = (
   <>
-    <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-      <img alt="logo" src="iconos/fiusac_negro.png" height="40" className="mr-2"></img>
+    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+      <img alt="logo" src="/iconos/fiusac_negro.png" height="40" className="mr-2" />
     </div>
-    
   </>
 );
 

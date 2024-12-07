@@ -1,12 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-    output: 'export',
-    publicRuntimeConfig: {
-      basePath: '/OLC2-PROYECTO-EV2S-2024-G2', // Exponer basePath al runtime
-    },
-    
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
+  trailingSlash: true,
+  publicRuntimeConfig: {
+    basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
+  },
 };
 
 export default nextConfig;
