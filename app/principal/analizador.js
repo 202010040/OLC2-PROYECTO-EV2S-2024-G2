@@ -230,7 +230,7 @@ function peg$parse(input, options) {
     peg$startRuleFunction = peg$startRuleFunctions[options.startRule];
   }
 
-  /*function text() {
+  function text() {
     return input.substring(peg$savedPos, peg$currPos);
   }
 
@@ -273,23 +273,23 @@ function peg$parse(input, options) {
   function peg$literalExpectation(text, ignoreCase) {
     return { type: "literal", text: text, ignoreCase: ignoreCase };
   }
-  */
+  
 
   function peg$classExpectation(parts, inverted, ignoreCase) {
     return { type: "class", parts: parts, inverted: inverted, ignoreCase: ignoreCase };
   }
 
-  /*function peg$anyExpectation() {
+  function peg$anyExpectation() {
     return { type: "any" };
-  }*/
+  }
 
   function peg$endExpectation() {
     return { type: "end" };
   }
 
-  /* function peg$otherExpectation(description) {
+  function peg$otherExpectation(description) {
     return { type: "other", description: description };
-  } */
+  }
 
   function peg$computePosDetails(pos) {
     var details = peg$posDetailsCache[pos];
@@ -363,9 +363,9 @@ function peg$parse(input, options) {
     peg$maxFailExpected.push(expected);
   }
 
-  /* function peg$buildSimpleError(message, location) {
+  function peg$buildSimpleError(message, location) {
     return new peg$SyntaxError(message, null, null, location);
-  } */
+  } 
 
   function peg$buildStructuredError(expected, found, location) {
     return new peg$SyntaxError(
