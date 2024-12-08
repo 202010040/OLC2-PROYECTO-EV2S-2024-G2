@@ -3,8 +3,7 @@ inicio
 
 identificador = [_a-zA-Z][_a-zA-Z0-9]*
 
-texto = '"' [^"]* '"'
-"'" [^']* 
+texto = '"' [^"]* '"' / "'"
 
 espacio
     = [ \t\r\n]*
@@ -21,7 +20,7 @@ corchete_abre = "["
 
 corchete_cierra = "]"
 
-clase = corchete_abre rango 
+clase = corchete_abre rango + corchete_cierra
 
 rango = [^[\]-] "-" [^[\]-]
 	/ [^[\]]+
