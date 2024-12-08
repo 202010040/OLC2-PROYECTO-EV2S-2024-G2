@@ -1,5 +1,5 @@
-inicio
-    = regla* { return "Gramática correcta" }
+start
+    = regla+ { return "Gramática correcta" }
 
 identificador = [_a-zA-Z][_a-zA-Z0-9]*
 
@@ -20,6 +20,7 @@ clase
     = "[" [^\]]+ "]" 
 
 // Reglas de la gramática
+
 
 regla
     =espacio identificador espacio "=" espacio alternativa espacio ";"?
