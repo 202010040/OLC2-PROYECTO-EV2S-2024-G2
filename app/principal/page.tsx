@@ -27,6 +27,15 @@ export default function Principal() {
         }
     }*/
 
+    const RevisionGramatica = () => {
+        try {
+            const resultado:string = AnalizarGramatica(Entrada);
+            setSalida(resultado);
+        } catch (error) {
+            setSalida(String(error));
+        }
+        
+    }
     return (
         <>
 
@@ -47,7 +56,7 @@ export default function Principal() {
                         severity="secondary"
                         outlined
                         raised
-                        onClick={() => setSalida(AnalizarGramatica(Entrada))}
+                        onClick={RevisionGramatica}
                     />
                 </div>
                 <div className="col-5">
