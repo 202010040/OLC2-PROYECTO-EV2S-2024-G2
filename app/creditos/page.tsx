@@ -5,7 +5,7 @@ export default function Creditos() {
   const miembros = [
     { nombre: 'María José Tebalan Sanchez', rol: '202100265' },
     { nombre: 'Maria de los angeles Paz de Leon', rol: '201602619' },
-    { nombre: 'Evelio Marcos Jousué Cruz Solíz', rol: '202010040' }
+    { nombre: 'Evelio Marcos Josué Cruz Solíz', rol: '202010040' }
     
   ];
 

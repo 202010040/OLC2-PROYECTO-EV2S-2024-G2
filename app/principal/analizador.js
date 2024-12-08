@@ -273,6 +273,7 @@ function peg$parse(input, options) {
   function peg$literalExpectation(text, ignoreCase) {
     return { type: "literal", text: text, ignoreCase: ignoreCase };
   }
+  
 
   function peg$classExpectation(parts, inverted, ignoreCase) {
     return { type: "class", parts: parts, inverted: inverted, ignoreCase: ignoreCase };
@@ -364,7 +365,7 @@ function peg$parse(input, options) {
 
   function peg$buildSimpleError(message, location) {
     return new peg$SyntaxError(message, null, null, location);
-  }
+  } 
 
   function peg$buildStructuredError(expected, found, location) {
     return new peg$SyntaxError(
