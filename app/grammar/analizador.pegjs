@@ -28,6 +28,7 @@ clase = corchete_abre rango + corchete_cierra
 rango = [^[\]-] "-" [^[\]-]
 	/ [^[\]]+
 
+
 regla
     =espacio identificador espacio "=" espacio alternativa espacio 
 

@@ -172,8 +172,8 @@ function peg$parse(input, options) {
   var peg$FAILED = {};
   var peg$source = options.grammarSource;
 
-  var peg$startRuleFunctions = { inicio: peg$parseinicio };
-  var peg$startRuleFunction = peg$parseinicio;
+  var peg$startRuleFunctions = { start: peg$parsestart };
+  var peg$startRuleFunction = peg$parsestart;
 
   var peg$c0 = "\"";
   var peg$c1 = "'";
@@ -377,7 +377,7 @@ function peg$parse(input, options) {
     );
   }
 
-  function peg$parseinicio() {
+  function peg$parsestart() {
     var s0, s1, s2;
 
     s0 = peg$currPos;
@@ -1108,7 +1108,7 @@ function peg$parse(input, options) {
 }
 
 const peg$allowedStartRules = [
-  "inicio"
+  "start"
 ];
 
 export {
