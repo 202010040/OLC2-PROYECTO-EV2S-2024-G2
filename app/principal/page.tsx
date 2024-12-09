@@ -29,13 +29,18 @@ export default function Principal() {
 
     const RevisionGramatica = () => {
         try {
-            const resultado:string = AnalizarGramatica(Entrada);
+            const resultado: string = AnalizarGramatica(Entrada);
             setSalida(resultado);
-        } catch (error) {
-            setSalida(String(error));
+        } catch (error: any) {
+            if (error.location) {
+                const { line, column } = error.location.start;
+                setSalida(`Error en la línea ${line}, columna ${column}: \n${error.message}`);
+            } else {
+                setSalida(`Error: ${String(error)}`);
+            }
         }
+    };
         
-    }
     return (
         <>
 

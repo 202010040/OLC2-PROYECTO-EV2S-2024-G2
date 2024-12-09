@@ -1,16 +1,19 @@
 inicio
-    = regla (";" nueva_linea regla)* { return "Gramática correcta" }
+    = regla (espacio ";" espacio regla)*  ";"? { return "Gramática correcta" }
 
 identificador = [_a-zA-Z][_a-zA-Z0-9]*
 
-texto = '"' [^"']* '"' / "'" [^"']* "'"
+texto = '"' [^"]* '"' / "'" [^']* "'"
 
 espacio
-    = [ \t]*
+    = ([ \t\r\n] / comentarios_simples/ comentarios_multilinea)* 
 
-nueva_linea
-    = [ \t\r\n]*
-  
+comentarios_simples
+    = "//" [^\n]*
+
+comentarios_multilinea
+    = "/*" (!"*/" .)* "*/"
+
 numero
     = [0-9]+
 
@@ -28,20 +31,25 @@ clase = corchete_abre rango + corchete_cierra
 rango = [^[\]-] "-" [^[\]-]
 	/ [^[\]]+
 
-
 regla
     =espacio identificador espacio "=" espacio alternativa espacio 
 
 alternativa
-    = expresion* (espacio "/" espacio expresion)*
+    = listado_expresiones (espacio "/" espacio listado_expresiones)*
+    
+listado_expresiones
+	= expresion espacio instancias? (espacio expresion espacio instancias?)*
 
 expresion
-  = espacio texto espacio 
-    / espacio identificador (espacio expresion)* espacio
+    = identificador (":" expresion_unica)
+    / expresion_unica
+
+expresion_unica
+  =  texto 
+    / identificador 
     / grupo
     / clase
     / numero
-    / instancias
 
 grupo
   = "[" espacio alternativa espacio "-" espacio alternativa espacio "]"
