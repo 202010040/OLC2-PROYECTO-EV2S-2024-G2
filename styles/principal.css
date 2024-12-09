@@ -39,11 +39,10 @@ body {
  
 .content {
     background-color:rgba(255, 255, 255, 0.062);
-    border-radius:30px;
+    border-radius:20px;
     border: 1px solid rgba(225, 225, 225, 0.662);
     box-shadow:0 0 .25em rgba(0,0,0,.25);
     left:50%;
-    padding:2%;
     position:fixed;
     top:50%;
     transform:translate(-50%, -50%);
@@ -52,7 +51,34 @@ body {
     overflow: auto;
 }
 
-.menu-bar{
-    background-color: #eaffffc5 !important;
-    border-radius: 25px;
+.menu-bar {
+    background: rgb(174,238,197);
+    background: radial-gradient(circle, rgba(174,238,197,0.41780462184873945) 0%, rgba(148,233,228,0.24693627450980393) 84%);
+    border: none; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); 
+}
+
+.menu-bar .p-menuitem-link {
+    color: #ececec; 
+    padding: 10px;
+}
+
+.menu-bar .p-menuitem-link:hover {
+    background-color: #85b5ba; 
+    border-radius: 10%;
+    box-shadow: 0 0 5px 3px #79b39c;
+}
+
+.menu-bar .p-menuitem-link:active {
+    background-color: #565656; 
+    color: #ffffff; 
+}
+
+.menu-bar .p-menuitem-icon {
+    color: #ffffff; 
+    margin-right: 8px; 
+}
+
+.menu-bar .p-menuitem-text {
+    color: #ffffff; 
 }

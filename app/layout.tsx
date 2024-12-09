@@ -51,8 +51,10 @@ export default function RootLayout({
 
         
         <div className="content">
-        <Menubar model={items} start={start} className='menu-bar'/> 
-          {children}
+        <Menubar model={items} start={start}  className='menu-bar'/> 
+          <div style={{padding: '2%'}}>
+            {children}
+          </div>
         </div>
         
       </body>
