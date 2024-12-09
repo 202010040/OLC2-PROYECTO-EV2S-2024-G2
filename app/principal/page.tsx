@@ -11,7 +11,6 @@ import '../../styles/compilador.css';
 
 export default function Principal() {
     const [Entrada, setEntrada] = useState("");
-    const [Salida, setSalida] = useState("");
 
     const msgs = useRef<Messages>(null);
 
@@ -33,18 +32,15 @@ export default function Principal() {
         LimpiarMensaje();
         try {
             const resultado: string = AnalizarGramatica(Entrada);
-            setSalida(resultado);
             // Mostrar mensaje después de la asignación de estado exitosa
             MostrarMensaje(true, resultado);
         } catch (error: any) {
             if (error?.location) {
                 const { line, column } = error.location.start;
                 const errorMsg = `Error en la línea ${line}, columna ${column}: \n${error.message}`;
-                setSalida(errorMsg);
                 MostrarMensaje(false, errorMsg);
             } else {
                 const errorMsg = `Error: ${String(error)}`;
-                setSalida(errorMsg);
                 MostrarMensaje(false, errorMsg);
             }
         }
