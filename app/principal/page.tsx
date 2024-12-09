@@ -10,8 +10,8 @@ import { Messages } from 'primereact/messages';
 import '../../styles/compilador.css';
 
 export default function Principal() {
-    const [Entrada, setEntrada] = useState("console.log('hello world!');");
-    const [Salida, setSalida] = useState('');
+    const [Entrada, setEntrada] = useState("");
+    const [Salida, setSalida] = useState("");
 
     const msgs = useRef<Messages>(null);
 
